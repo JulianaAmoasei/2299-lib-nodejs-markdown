@@ -14,4 +14,14 @@ describe('pegaArquivo::', () => {
     const resultado = await pegaArquivo('/home/juliana/Documents/alura/lib-markdown/test/arquivos/texto1.md') 
     expect(resultado).toEqual(arrayResult)
   })
+  it('deve retornar mensagem "não há links"', async () => {
+    const resultado = await pegaArquivo('/home/juliana/Documents/alura/lib-markdown/test/arquivos/texto1_semlinks.md')
+    expect(resultado).toBe('não há links');
+  })
+  it('deve lançar um erro na falta de arquivo', () => {
+    async function capturaErro() {
+      await pegaArquivo('/home/juliana/Documents/alura/lib-markdown/test/arquivos')
+      expect(capturaErro).toThrowError(/não há arquivo no caminho/)
+    }
+  })
 })
